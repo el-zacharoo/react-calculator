@@ -15,13 +15,12 @@ export const CalculatorButton = (props: CalculatorButtonProps) => {
         <Box
             onClick={() => onClick()}
             sx={{
-                flexGrow: 1,
-                // minWidth: 0,
                 typography: 'h2',
                 p: 4,
                 color: 'background.default',
-                backgroundColor: colour ? colour : 'gray.100',
+                backgroundColor: colour,
                 alignItems: 'center',
+                justifyContent: 'center',
                 display: 'flex',
                 '&:hover': {
                     cursor: 'pointer',

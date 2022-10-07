@@ -9,23 +9,15 @@ import Screen from './Screen';
 import CalculatorButton from './CalculatorButton';
 
 export const App = () => {
-  const [count, setCount] = useState<any>(0)
+  const [count, setCount] = useState<Number>(0);
+  const [func, setFunc] = useState<Function>();
+  const [value, setValue] = useState<String>('');
 
   return (
     <ThemeProvider theme={theme}>
       <Container maxWidth="xs">
         <Screen value={count} />
-        <Grid columns={4} sx={{
-          '--Grid-borderWidth': '2px',
-          borderTop: 'var(--Grid-borderWidth) solid',
-          borderLeft: 'var(--Grid-borderWidth) solid',
-          borderColor: 'divider',
-          '& > div': {
-            borderRight: 'var(--Grid-borderWidth) solid',
-            borderBottom: 'var(--Grid-borderWidth) solid',
-            borderColor: 'divider',
-          },
-        }} container>
+        <Grid columns={4} sx={border} container>
           {numberArr.map((item, index) =>
             <Grid xs={item.span} sx={{}} key={index} >
               <CalculatorButton onClick={() => setCount(item.value)} colour={item.colour}>{item.title}</CalculatorButton>
@@ -35,8 +27,7 @@ export const App = () => {
       </Container>
     </ThemeProvider>
   )
-}
-
+};
 export default App;
 
 const numberArr = [
@@ -68,4 +59,16 @@ const numberArr = [
   { title: '.', colour: 'gray.100', value: '.', span: 1 },
 
   { title: '=', colour: 'primary.main', span: 1 },
-]
+];
+
+const border = {
+  '--Grid-borderWidth': '2px',
+  borderTop: 'var(--Grid-borderWidth) solid',
+  borderLeft: 'var(--Grid-borderWidth) solid',
+  borderColor: 'divider',
+  '& > div': {
+    borderRight: 'var(--Grid-borderWidth) solid',
+    borderBottom: 'var(--Grid-borderWidth) solid',
+    borderColor: 'divider',
+  },
+};
