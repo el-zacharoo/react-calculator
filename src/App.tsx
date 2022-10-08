@@ -9,45 +9,57 @@ import Screen from './Screen';
 import CalculatorButton from './CalculatorButton';
 
 export const App = () => {
-  const [count, setCount] = useState<Number>(0);
-  const [func, setFunc] = useState<Function>();
-  const [value, setValue] = useState<String>('');
+  const [calc, setCalc] = useState<any>({
+    sign: "",
+    number: 0,
+    reset: 0,
+  });
+
+  console.log(calc)
+
+  const numClickHandler = (e: any) => {
+    const value = e
+    console.log(value);
+    setCalc({ number: value })
+  };
 
   return (
     <ThemeProvider theme={theme}>
       <Container maxWidth="xs">
-        <Screen value={count} />
+
+        <Screen value={calc.number ? calc.number : calc.reset} />
         <Grid columns={4} sx={border} container>
           {numberArr.map((item, index) =>
-            <Grid xs={item.span} sx={{}} key={index} >
-              <CalculatorButton onClick={() => setCount(item.value)} colour={item.colour}>{item.title}</CalculatorButton>
+            <Grid xs={item.span} key={index} >
+              <CalculatorButton onClick={() => numClickHandler(item.value)} colour={item.colour}>{item.title}</CalculatorButton>
             </Grid>
           )}
         </Grid>
       </Container>
-    </ThemeProvider>
+    </ThemeProvider >
   )
 };
+
 export default App;
 
 const numberArr = [
   { title: 'AC', colour: 'gray.200', value: 0, span: 1 },
-  { title: '+/-', colour: 'gray.200', span: 1 },
-  { title: '%', colour: 'gray.200', span: 1 },
+  { title: '+/-', colour: 'gray.200', value: "+/-", span: 1 },
+  { title: '%', colour: 'gray.200', value: "%", span: 1 },
 
-  { title: '/', colour: 'primary.main', value: '+', span: 1 },
+  { title: '/', colour: 'primary.main', value: '/', span: 1 },
 
   { title: 1, colour: 'gray.100', value: 1, span: 1 },
   { title: 2, colour: 'gray.100', value: 2, span: 1 },
   { title: 3, colour: 'gray.100', value: 3, span: 1 },
 
-  { title: '*', colour: 'primary.main', span: 1 },
+  { title: 'X', colour: 'primary.main', value: '*', span: 1 },
 
   { title: 4, colour: 'gray.100', value: 4, span: 1 },
   { title: 5, colour: 'gray.100', value: 5, span: 1 },
   { title: 6, colour: 'gray.100', value: 6, span: 1 },
 
-  { title: '-', colour: 'primary.main', span: 1 },
+  { title: '-', colour: 'primary.main', value: '-', span: 1 },
 
   { title: 7, colour: 'gray.100', value: 7, span: 1 },
   { title: 8, colour: 'gray.100', value: 8, span: 1 },
@@ -58,7 +70,7 @@ const numberArr = [
   { title: 0, colour: 'gray.100', value: 0, span: 2 },
   { title: '.', colour: 'gray.100', value: '.', span: 1 },
 
-  { title: '=', colour: 'primary.main', span: 1 },
+  { title: '=', colour: 'primary.main', value: "=", span: 1 },
 ];
 
 const border = {
@@ -72,3 +84,9 @@ const border = {
     borderColor: 'divider',
   },
 };
+
+// const toLocaleString = (num: any) => {
+//   String(num).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
+// }
+
+// const removeSpaces = (num: any) => { num.toString().replace(/\s/g, ""); }
