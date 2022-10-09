@@ -8,30 +8,66 @@ import { theme } from '../theme';
 import Screen from './Screen';
 import CalculatorButton from './CalculatorButton';
 
+// type NumType = Number | String | Array<Number>
+
 export const App = () => {
-  const [calc, setCalc] = useState<any>({
-    sign: "",
-    number: 0,
-    reset: 0,
-  });
+  const [number, setNumber] = useState<any>([]);
+  const [sign, setSign] = useState<String>("");
+  const [reset, setReset] = useState<number>(0);
 
-  console.log(calc)
-
-  const numClickHandler = (e: any) => {
-    const value = e
-    console.log(value);
-    setCalc({ number: value })
-  };
+  const handlerFunc = (value: any) => {
+    if (value === "C") {
+      setNumber([]);
+      setSign("");
+      setReset(0);
+    }
+    else if (value === ".") {
+      setNumber(number + value);
+    }
+    else if (value === "/" || value === "X" || value === "-" || value === "+") {
+      setSign(value);
+      setReset(!reset && number ? number : reset)
+      setNumber([]);
+    }
+    else if (value === "+/-") {
+      setNumber(number * -1);
+      setReset(reset * -1);
+    }
+    else if (value === "=") {
+      if (sign && number) {
+        const math = (a: any, b: any, sign: String) =>
+          sign === "+" ? a + b
+            : sign === "-" ? a - b
+              : sign === "X" ? a * b : a / b;
+        setNumber(number === 0 && sign === "/" ? "Can't divide with 0" : toLocaleString(
+          math(
+            Number(removeSpaces(reset)),
+            Number(removeSpaces(number)),
+            sign
+          )),
+        )
+      }
+    }
+    else if (value === "%") {
+      var num = number ? parseFloat(removeSpaces(number)) : 0;
+      var res = reset ? parseFloat(removeSpaces(reset)) : 0;
+      setNumber(num /= Math.pow(100, 1))
+      setReset(res /= Math.pow(100, 1))
+      setSign("");
+    }
+    else {
+      setNumber(number + value);
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
       <Container maxWidth="xs">
-
-        <Screen value={calc.number ? calc.number : calc.reset} />
+        <Screen value={number.length === 0 ? reset : number} />
         <Grid columns={4} sx={border} container>
-          {numberArr.map((item, index) =>
+          {calcArr.map((item, index) =>
             <Grid xs={item.span} key={index} >
-              <CalculatorButton onClick={() => numClickHandler(item.value)} colour={item.colour}>{item.title}</CalculatorButton>
+              <CalculatorButton value={item.title} onClick={() => handlerFunc(item.value)} colour={item.colour} />
             </Grid>
           )}
         </Grid>
@@ -42,8 +78,8 @@ export const App = () => {
 
 export default App;
 
-const numberArr = [
-  { title: 'AC', colour: 'gray.200', value: 0, span: 1 },
+const calcArr = [
+  { title: 'AC', colour: 'gray.200', value: 'C', span: 1 },
   { title: '+/-', colour: 'gray.200', value: "+/-", span: 1 },
   { title: '%', colour: 'gray.200', value: "%", span: 1 },
 
@@ -53,7 +89,7 @@ const numberArr = [
   { title: 2, colour: 'gray.100', value: 2, span: 1 },
   { title: 3, colour: 'gray.100', value: 3, span: 1 },
 
-  { title: 'X', colour: 'primary.main', value: '*', span: 1 },
+  { title: 'X', colour: 'primary.main', value: 'X', span: 1 },
 
   { title: 4, colour: 'gray.100', value: 4, span: 1 },
   { title: 5, colour: 'gray.100', value: 5, span: 1 },
@@ -85,8 +121,7 @@ const border = {
   },
 };
 
-// const toLocaleString = (num: any) => {
-//   String(num).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
-// }
+const toLocaleString = (number: String) =>
+  String(number).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
 
-// const removeSpaces = (num: any) => { num.toString().replace(/\s/g, ""); }
+const removeSpaces = (number: any) => number.toString().replace(/\s/g, "");
