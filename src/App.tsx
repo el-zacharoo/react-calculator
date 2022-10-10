@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Switch } from './Switch';
+import Calculator from './Calculator';
 
 type Value = String | Number;
 
@@ -81,7 +81,7 @@ export const App = () => {
     }
   }
 
-  return <Switch screen={screen} onClick={handlerFunc} />
+  return <Calculator screen={screen} onClick={handlerFunc} />
 };
 
 export default App;
