@@ -1,23 +1,25 @@
 import * as React from 'react';
 
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import { Divider } from '@mui/material';
 
 export const Screen = ({ value }: any) => {
     return (
-        <Box sx={{
-            backgroundColor: 'gray.300',
-            px: 2, py: 4,
-            color: 'background.default',
-            typography: 'h1',
-            borderLeft: 1,
-            borderRight: 1,
-            borderTop: 1,
-            borderColor: 'secondary.main',
-            display: 'flex',
-            justifyContent: 'flex-end',
-        }} >
-            {value}
-        </Box>
+        <>
+            <Stack
+                direction="row"
+                justifyContent='flex-end'
+                sx={{
+                    px: 2, py: 4,
+                    typography: 'h1',
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                }} >
+                {value}
+            </Stack>
+            <Divider />
+        </>
     )
 }
 export default Screen;

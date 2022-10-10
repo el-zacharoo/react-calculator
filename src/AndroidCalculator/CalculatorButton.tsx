@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
 
 interface CalculatorButtonProps {
     colour: Object;
@@ -13,28 +12,21 @@ interface CalculatorButtonProps {
 export const CalculatorButton = (props: CalculatorButtonProps) => {
     const { colour, value, children, onClick } = props;
 
+    const dim = 75;
+
+    const style =
+        value === "="
+            ?
+            { backgroundColor: colour, width: dim, height: dim, color: 'background.paper' }
+            :
+            { backgroundColor: 'background.default', color: colour, width: dim, height: dim }
+
 
     return (
-        <Box
-            component={Button}
-            onClick={() => onClick(value)}
-            sx={{
-                borderRadius: 0,
-                border: 0,
-                width: '100%',
-                typography: 'h2',
-                p: 3,
-                backgroundColor: colour,
-                color: 'background.default',
-                alignItems: 'center',
-                justifyContent: 'center',
-                display: 'flex',
-                '&:hover': {
-                    backgroundColor: colour,
-                }
-            }}>
+        <IconButton sx={style} onClick={() => onClick(value)}  >
             {children}
-        </Box >
+        </IconButton >
+
     )
 }
 export default CalculatorButton;

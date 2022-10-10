@@ -13,7 +13,6 @@ interface CalculatorButtonProps {
 export const CalculatorButton = (props: CalculatorButtonProps) => {
     const { colour, value, children, onClick } = props;
 
-
     return (
         <Box
             component={Button}

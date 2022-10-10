@@ -12,7 +12,7 @@ export const Screen = ({ value }: any) => {
             borderLeft: 1,
             borderRight: 1,
             borderTop: 1,
-            borderColor: 'secondary.main',
+            borderColor: 'gray.300',
             display: 'flex',
             justifyContent: 'flex-end',
         }} >
