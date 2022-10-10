@@ -8,22 +8,32 @@ import { theme } from '../theme';
 import Screen from './Screen';
 import CalculatorButton from './CalculatorButton';
 
+type Value = String | Number;
 
 export const App = () => {
   const [number, setNumber] = useState<any>([]);
   const [sign, setSign] = useState<String>("");
   const [reset, setReset] = useState<number>(0);
 
-  const handleKeyDown = (e: any) => {
+  const handleKeyDown = (e: KeyboardEvent) => {
     const value = e.key;
-    setNumber(number + value);
+    if (value === "Backspace") {
+      setNumber(number.slice(0, -1));
+    } else if (value === "Escape") {
+      setNumber([]);
+      setSign("");
+      setReset(0);
+    }
+    else {
+      setNumber(number + value);
+    }
   }
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown, true);
   })
 
-  const handlerFunc = (e: any) => {
+  const handlerFunc = (e: Value) => {
     const value = e;
 
     if (value === "C") {
@@ -75,10 +85,12 @@ export const App = () => {
     }
   }
 
+  const screen = number.length === 0 ? reset : number;
+
   return (
     <ThemeProvider theme={theme}>
       <Container maxWidth="xs">
-        <Screen value={number.length === 0 ? reset : number} />
+        <Screen value={screen} />
         <Grid columns={4} sx={border} container>
           {calcArr.map((item, index) =>
             <Grid xs={item.span} key={index} >
@@ -128,11 +140,11 @@ const border = {
   '--Grid-borderWidth': '1px',
   borderTop: 'var(--Grid-borderWidth) solid',
   borderLeft: 'var(--Grid-borderWidth) solid',
-  borderColor: 'divider',
+  borderColor: '#000',
   '& > div': {
     borderRight: 'var(--Grid-borderWidth) solid',
     borderBottom: 'var(--Grid-borderWidth) solid',
-    borderColor: 'divider',
+    borderColor: '#000',
   },
 };
 
