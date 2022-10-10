@@ -2,10 +2,7 @@ import * as React from 'react';
 
 import Box from '@mui/material/Box';
 
-type Val = String;
-
 export const Screen = ({ value }: any) => {
-    console.log(value)
     return (
         <Box sx={{
             backgroundColor: 'gray.300',
