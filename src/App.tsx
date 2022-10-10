@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-import Container from '@mui/material/Container';
-import { ThemeProvider } from '@mui/material/styles';
-
-import { theme } from './theme';
-import { MacCalculator } from '@/MacCalculator';
+import { Switch } from './Switch';
 
 type Value = String | Number;
 
 export const App = () => {
-  const [change, setChange] = useState<String>('mac');
   const [number, setNumber] = useState<any>([]);
   const [sign, setSign] = useState<String>("");
   const [reset, setReset] = useState<number>(0);
@@ -86,13 +81,7 @@ export const App = () => {
 
   const screen = number.length === 0 ? reset : number;
 
-  return (
-    <ThemeProvider theme={theme}>
-      <Container maxWidth="xs">
-        {change === 'mac' && <MacCalculator screen={screen} onClick={handlerFunc} />}
-      </Container>
-    </ThemeProvider >
-  )
+  return <Switch screen={screen} onClick={handlerFunc} />
 };
 
 export default App;

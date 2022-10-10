@@ -5,12 +5,12 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Screen from './Screen';
 import CalculatorButton from './CalculatorButton';
 
-interface MacCalculator {
+interface AndroidCalculator {
     screen: any;
     onClick: Function;
 }
 
-export const MacCalculator = (props: MacCalculator) => {
+export const AndroidCalculator = (props: AndroidCalculator) => {
     const { onClick, screen } = props
     return (
         <>
