@@ -1,20 +1,27 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 
+import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
 interface CalculatorButtonProps {
     colour: Object;
-    value: any;
+    value: String | Number;
+    children: React.ReactNode;
     onClick: Function;
 }
 
 export const CalculatorButton = (props: CalculatorButtonProps) => {
-    const { colour, value, onClick } = props;
+    const { colour, value, children, onClick } = props;
+
 
     return (
         <Box
-            onClick={() => onClick()}
+            component={Button}
+            onClick={() => onClick(value)}
             sx={{
+                borderRadius: 0,
+                border: 0,
+                width: '100%',
                 typography: 'h2',
                 p: 4,
                 backgroundColor: colour,
@@ -23,11 +30,11 @@ export const CalculatorButton = (props: CalculatorButtonProps) => {
                 justifyContent: 'center',
                 display: 'flex',
                 '&:hover': {
-                    cursor: 'pointer',
+                    backgroundColor: colour,
                 }
             }}>
-            {value}
-        </Box>
+            {children}
+        </Box >
     )
 }
 export default CalculatorButton;

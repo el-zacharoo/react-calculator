@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
@@ -8,31 +8,45 @@ import { theme } from '../theme';
 import Screen from './Screen';
 import CalculatorButton from './CalculatorButton';
 
-// type NumType = Number | String | Array<Number>
 
 export const App = () => {
   const [number, setNumber] = useState<any>([]);
   const [sign, setSign] = useState<String>("");
   const [reset, setReset] = useState<number>(0);
 
-  const handlerFunc = (value: any) => {
+  const handleKeyDown = (e: any) => {
+    const value = e.key;
+    setNumber(number + value);
+  }
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown, true);
+  })
+
+  const handlerFunc = (e: any) => {
+    const value = e;
+
     if (value === "C") {
       setNumber([]);
       setSign("");
       setReset(0);
     }
+
     else if (value === ".") {
       setNumber(number + value);
     }
+
     else if (value === "/" || value === "X" || value === "-" || value === "+") {
       setSign(value);
       setReset(!reset && number ? number : reset)
       setNumber([]);
     }
+
     else if (value === "+/-") {
       setNumber(number * -1);
       setReset(reset * -1);
     }
+
     else if (value === "=") {
       if (sign && number) {
         const math = (a: any, b: any, sign: String) =>
@@ -57,6 +71,7 @@ export const App = () => {
     }
     else {
       setNumber(number + value);
+      handleKeyDown;
     }
   }
 
@@ -67,7 +82,7 @@ export const App = () => {
         <Grid columns={4} sx={border} container>
           {calcArr.map((item, index) =>
             <Grid xs={item.span} key={index} >
-              <CalculatorButton value={item.title} onClick={() => handlerFunc(item.value)} colour={item.colour} />
+              <CalculatorButton value={item.value} onClick={handlerFunc} colour={item.colour} >{item.title}</CalculatorButton>
             </Grid>
           )}
         </Grid>
@@ -79,11 +94,11 @@ export const App = () => {
 export default App;
 
 const calcArr = [
-  { title: 'AC', colour: 'gray.200', value: 'C', span: 1 },
+  { title: 'C', colour: 'gray.200', value: 'C', span: 1 },
   { title: '+/-', colour: 'gray.200', value: "+/-", span: 1 },
   { title: '%', colour: 'gray.200', value: "%", span: 1 },
 
-  { title: '/', colour: 'primary.main', value: '/', span: 1 },
+  { title: '÷', colour: 'primary.main', value: '/', span: 1 },
 
   { title: 1, colour: 'gray.100', value: 1, span: 1 },
   { title: 2, colour: 'gray.100', value: 2, span: 1 },
@@ -110,7 +125,7 @@ const calcArr = [
 ];
 
 const border = {
-  '--Grid-borderWidth': '2px',
+  '--Grid-borderWidth': '1px',
   borderTop: 'var(--Grid-borderWidth) solid',
   borderLeft: 'var(--Grid-borderWidth) solid',
   borderColor: 'divider',
@@ -124,4 +139,4 @@ const border = {
 const toLocaleString = (number: String) =>
   String(number).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
 
-const removeSpaces = (number: any) => number.toString().replace(/\s/g, "");
+const removeSpaces = (number: number) => number.toString().replace(/\s/g, "");
