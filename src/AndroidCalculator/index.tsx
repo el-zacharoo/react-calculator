@@ -38,9 +38,9 @@ const calcArr = [
 
     { title: '÷', colour: 'primary.main', value: '/', span: 1 },
 
-    { title: 1, colour: 'gray.100', value: 1, span: 1 },
-    { title: 2, colour: 'gray.100', value: 2, span: 1 },
-    { title: 3, colour: 'gray.100', value: 3, span: 1 },
+    { title: 7, colour: 'gray.100', value: 7, span: 1 },
+    { title: 8, colour: 'gray.100', value: 8, span: 1 },
+    { title: 9, colour: 'gray.100', value: 9, span: 1 },
 
     { title: 'X', colour: 'primary.main', value: 'X', span: 1 },
 
@@ -50,9 +50,10 @@ const calcArr = [
 
     { title: '-', colour: 'primary.main', value: '-', span: 1 },
 
-    { title: 7, colour: 'gray.100', value: 7, span: 1 },
-    { title: 8, colour: 'gray.100', value: 8, span: 1 },
-    { title: 9, colour: 'gray.100', value: 9, span: 1 },
+
+    { title: 1, colour: 'gray.100', value: 1, span: 1 },
+    { title: 2, colour: 'gray.100', value: 2, span: 1 },
+    { title: 3, colour: 'gray.100', value: 3, span: 1 },
 
     { title: '+', colour: 'primary.main', value: '+', span: 1 },
 

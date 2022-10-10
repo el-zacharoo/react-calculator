@@ -50,6 +50,5 @@ export const Switch = (props: any) => {
 
 const tabArr = [
     { label: 'Mac Calculator', state: 0, theme: macTheme },
-    { label: 'Android Calculator', state: 1, theme: androidTheme },
-    { label: 'Custom Calculator', state: 2 }
+    { label: 'Android Calculator', state: 1, theme: androidTheme }
 ]

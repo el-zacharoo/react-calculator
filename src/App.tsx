@@ -9,6 +9,8 @@ export const App = () => {
   const [sign, setSign] = useState<String>("");
   const [reset, setReset] = useState<number>(0);
 
+  const screen = number.length === 0 ? reset : number;
+
   const handleKeyDown = (e: KeyboardEvent) => {
     const value = e.key;
     if (value === "Backspace") {
@@ -78,8 +80,6 @@ export const App = () => {
       handleKeyDown;
     }
   }
-
-  const screen = number.length === 0 ? reset : number;
 
   return <Switch screen={screen} onClick={handlerFunc} />
 };
