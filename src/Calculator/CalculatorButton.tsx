@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import * as React from 'react';
 
-import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 
 interface CalculatorButtonProps {
     type: String;

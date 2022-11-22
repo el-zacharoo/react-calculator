@@ -1,36 +1,30 @@
-// eslint-disable-next-line no-undef
-module.exports = {
-    "env": {
+{
+  "env": {
         "browser": true,
-        "es2021": true,
-        // "node": true
-    },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:react-hooks/recommended",
-        "plugin:jsx-a11y/recommended"
-    ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react",
-        "react-hooks",
-        "jsx-a11y",
-        "import"
-    ],
-    "rules": {
-        "react/prop-types": 0,
-        "camelcase": ["error"],
-        "prefer-template": "error",
-        "prefer-const": "error",
-        "eqeqeq": ["error", "smart"],
-        "import/order": [
+        "es2021": true
+  },
+
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "react",
+    "react-hooks",
+    "jsx-a11y",
+    "import",
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/eslint-recommended"
+    // "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "react/prop-types": 0,
+    "prefer-template": "error",
+    "prefer-const": "error",
+    "eqeqeq": ["error", "smart"],
+    "import/order": [
             "warn",
             {
                 "groups": [
@@ -63,4 +57,3 @@ module.exports = {
         ]
     }
 }
-

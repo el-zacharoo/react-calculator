@@ -69,8 +69,8 @@ export const App = () => {
       }
     }
     else if (value === "%") {
-      var num = number ? parseFloat(removeSpaces(number)) : 0;
-      var res = reset ? parseFloat(removeSpaces(reset)) : 0;
+      let num = number ? parseFloat(removeSpaces(number)) : 0;
+      let res = reset ? parseFloat(removeSpaces(reset)) : 0;
       setNumber(num /= Math.pow(100, 1))
       setReset(res /= Math.pow(100, 1))
       setSign("");

@@ -4,15 +4,15 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
+import { ThemeProvider } from '@mui/material/styles';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
-import { ThemeProvider } from '@mui/material/styles';
+import Grid from '@mui/material/Unstable_Grid2';
 
 import { androidTheme } from '../androidTheme';
 import { macTheme } from '../macTheme';
-import Screen from './Screen';
 import CalculatorButton from './CalculatorButton';
+import Screen from './Screen';
 
 export const Calculator = (props: any) => {
     const [value, setValue] = useState<number>(0);

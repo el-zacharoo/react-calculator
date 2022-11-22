@@ -1,17 +1,17 @@
 import * as React from 'react';
 
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
+import Stack from '@mui/material/Stack';
 
 interface Screen {
-    value: any;
+    value: number[];
     type: String;
 }
 
 export const Screen = (props: Screen) => {
     const { value, type } = props;
-    var header
+    let header
     if (value.length > 15) {
         header = 'h5'
     }
@@ -26,9 +26,9 @@ export const Screen = (props: Screen) => {
 }
 export default Screen;
 
-interface ScreenTypeProps {
+type ScreenTypeProps = {
     value: React.ReactNode;
-    header: Object;
+    header: string;
 }
 
 const MacScreen = (props: ScreenTypeProps) => {
