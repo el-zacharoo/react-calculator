@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 import Calculator from './Calculator';
 
-type Value = string | number | undefined;
+type NumberSet = number[]
 
 export const App = (): React.ReactElement => {
-  const [number, setNumber] = useState<Value[]>([]);
+  const [number, setNumber] = useState<NumberSet>([0]);
   const [sign, setSign] = useState<string>("");
   const [reset, setReset] = useState<number>(0);
 
@@ -29,9 +29,7 @@ export const App = (): React.ReactElement => {
     document.addEventListener('keydown', handleKeyDown, true);
   })
 
-  const handlerFunc = (e: Value) => {
-    const value = e;
-
+  const handlerFunc = (value: any) => {
     if (value === "C") {
       setNumber([]);
       setSign("");
@@ -55,7 +53,7 @@ export const App = (): React.ReactElement => {
 
     else if (value === "=") {
       if (sign && number) {
-        const math = (a: Value, b: Value, sign: string) =>
+        const math = (a: number, b: number, sign: string) =>
           sign === "+" ? a + b
             : sign === "-" ? a - b
               : sign === "X" ? a * b : a / b;
@@ -76,12 +74,12 @@ export const App = (): React.ReactElement => {
       setSign("");
     }
     else {
-      setNumber(number as Value + value);
+      setNumber(number + value);
       handleKeyDown;
     }
   }
 
-  return <Calculator screen={screen} onClick={handlerFunc} />
+  return <Calculator screen={screen} onClick={(e: any) => handlerFunc(e)} />
 };
 
 export default App;

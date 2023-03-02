@@ -5,7 +5,7 @@ import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 
 type ScreenTypes = {
-    value: number[];
+    value: number[] & number;
     type: string;
 }
 

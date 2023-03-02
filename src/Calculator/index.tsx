@@ -27,7 +27,7 @@ export const Calculator = (props: any): React.ReactElement => {
             <ThemeProvider theme={theme} >
                 <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 2 }}>
                     <Tabs value={value} onChange={handleChange} >
-                        {tabArr.map((tab, index) =>
+                        {tabArr.map((tab, index: number) =>
                             <Tab key={index} label={tab.label} />
                         )}
                     </Tabs>
@@ -45,9 +45,9 @@ export const Calculator = (props: any): React.ReactElement => {
 
 export default Calculator;
 
-interface CalculatorTypesProps {
-    screen: any;
-    onClick: (value: any) => void;
+type CalculatorTypesProps = {
+    screen: number[] & number;
+    onClick: (value: number) => void;
 }
 
 const Android = (props: CalculatorTypesProps): React.ReactElement => {
