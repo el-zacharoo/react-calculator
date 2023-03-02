@@ -27,7 +27,7 @@ export const Screen = (props: ScreenTypes): React.ReactElement => {
 export default Screen;
 
 type ScreenTypeProps = {
-    value: React.ReactNode;
+    value: number[] & number;
     header: string;
 }
 

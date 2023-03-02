@@ -4,14 +4,13 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 
-interface CalculatorButtonProps {
-    type: string;
+type CalculatorButtonProps = {
+    type?: string;
     colour: string;
     value: string | number;
     children: React.ReactNode;
     onClick: (value: string | number) => void;
 }
-
 export const CalculatorButton = (props: CalculatorButtonProps): React.ReactElement => {
     const { type } = props;
 
@@ -23,15 +22,8 @@ export const CalculatorButton = (props: CalculatorButtonProps): React.ReactEleme
 }
 export default CalculatorButton;
 
-interface ButtonTypeProps {
-    colour: string;
-    value: string | number;
-    children: React.ReactNode;
-    onClick: (value: string | number) => void;
-}
 
-
-const MacButton = (props: ButtonTypeProps) => {
+const MacButton = (props: CalculatorButtonProps) => {
     const { colour, value, children, onClick } = props;
 
     return (
@@ -58,7 +50,7 @@ const MacButton = (props: ButtonTypeProps) => {
     )
 }
 
-const AndroidButton = (props: ButtonTypeProps) => {
+const AndroidButton = (props: CalculatorButtonProps) => {
     const { colour, value, children, onClick } = props;
     const dim = 75;
 
