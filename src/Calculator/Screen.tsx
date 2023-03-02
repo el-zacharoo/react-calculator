@@ -4,12 +4,12 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 
-interface Screen {
+type ScreenTypes = {
     value: number[];
-    type: String;
+    type: string;
 }
 
-export const Screen = (props: Screen) => {
+export const Screen = (props: ScreenTypes): React.ReactElement => {
     const { value, type } = props;
     let header
     if (value.length > 15) {
@@ -31,7 +31,7 @@ type ScreenTypeProps = {
     header: string;
 }
 
-const MacScreen = (props: ScreenTypeProps) => {
+const MacScreen = (props: ScreenTypeProps): React.ReactElement => {
     const { value, header } = props;
 
     return (

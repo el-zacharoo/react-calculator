@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 
 import Calculator from './Calculator';
 
-type Value = String | Number;
+type Value = string | number | undefined;
 
-export const App = () => {
-  const [number, setNumber] = useState<any>([]);
-  const [sign, setSign] = useState<String>("");
+export const App = (): React.ReactElement => {
+  const [number, setNumber] = useState<Value[]>([]);
+  const [sign, setSign] = useState<string>("");
   const [reset, setReset] = useState<number>(0);
 
   const screen = number.length === 0 ? reset : number;
@@ -55,7 +55,7 @@ export const App = () => {
 
     else if (value === "=") {
       if (sign && number) {
-        const math = (a: any, b: any, sign: String) =>
+        const math = (a: Value, b: Value, sign: string) =>
           sign === "+" ? a + b
             : sign === "-" ? a - b
               : sign === "X" ? a * b : a / b;
@@ -76,7 +76,7 @@ export const App = () => {
       setSign("");
     }
     else {
-      setNumber(number + value);
+      setNumber(number as Value + value);
       handleKeyDown;
     }
   }
@@ -86,7 +86,7 @@ export const App = () => {
 
 export default App;
 
-const toLocaleString = (number: String) =>
+const toLocaleString = (number: string) =>
   String(number).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
 
 const removeSpaces = (number: number) => number.toString().replace(/\s/g, "");

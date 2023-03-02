@@ -5,14 +5,14 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 
 interface CalculatorButtonProps {
-    type: String;
-    colour: Object;
-    value: String | Number;
+    type: string;
+    colour: string;
+    value: string | number;
     children: React.ReactNode;
-    onClick: Function;
+    onClick: (value: any) => void;
 }
 
-export const CalculatorButton = (props: CalculatorButtonProps) => {
+export const CalculatorButton = (props: CalculatorButtonProps): React.ReactElement => {
     const { type } = props;
 
     switch (type) {
@@ -24,10 +24,10 @@ export const CalculatorButton = (props: CalculatorButtonProps) => {
 export default CalculatorButton;
 
 interface ButtonTypeProps {
-    colour: Object;
-    value: String | Number;
+    colour: string;
+    value: string | number;
     children: React.ReactNode;
-    onClick: Function;
+    onClick: (value: any) => void;
 }
 
 

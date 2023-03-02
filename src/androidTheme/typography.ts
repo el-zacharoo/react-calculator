@@ -1,4 +1,4 @@
-export const typography: Object = {
+export const typography: object = {
     h1: {
         fontSize: '2.5rem',
         fontWeight: 400,

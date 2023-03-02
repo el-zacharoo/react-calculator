@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Container from '@mui/material/Container';
-import { ThemeProvider } from '@mui/material/styles';
+import { Theme, ThemeProvider } from '@mui/material/styles';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Grid from '@mui/material/Unstable_Grid2';
@@ -14,7 +14,7 @@ import { macTheme } from '../macTheme';
 import CalculatorButton from './CalculatorButton';
 import Screen from './Screen';
 
-export const Calculator = (props: any) => {
+export const Calculator = (props: any): React.ReactElement => {
     const [value, setValue] = useState<number>(0);
 
     const handleChange = (e: React.SyntheticEvent, newValue: number) => {
@@ -47,10 +47,10 @@ export default Calculator;
 
 interface CalculatorTypesProps {
     screen: any;
-    onClick: Function;
+    onClick: (value: any) => void;
 }
 
-const Android = (props: CalculatorTypesProps) => {
+const Android = (props: CalculatorTypesProps): React.ReactElement => {
     const { screen, onClick } = props;
 
     return (
@@ -67,7 +67,7 @@ const Android = (props: CalculatorTypesProps) => {
     )
 }
 
-const Mac = (props: CalculatorTypesProps) => {
+const Mac = (props: CalculatorTypesProps): React.ReactElement => {
     const { screen, onClick } = props;
 
     return (
@@ -85,7 +85,7 @@ const Mac = (props: CalculatorTypesProps) => {
 }
 
 
-const themeSwitch = (value: Object) => {
+const themeSwitch = (value: number): Theme => {
     if (value === 1) {
         return androidTheme;
     }

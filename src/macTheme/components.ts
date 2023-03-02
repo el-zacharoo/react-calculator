@@ -1,6 +1,6 @@
 // import { palette } from './palette';
 
-export const components = {
+export const components: object = {
     // MuiCssBaseline: {
     //     '@global': {
     //     }
