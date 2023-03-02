@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 
 import Calculator from './Calculator';
 
-type NumberSet = number[]
+type CalcNumber = any;
 
 export const App = (): React.ReactElement => {
-  const [number, setNumber] = useState<NumberSet>([0]);
+  const [number, setNumber] = useState<CalcNumber>([]);
   const [sign, setSign] = useState<string>("");
   const [reset, setReset] = useState<number>(0);
 
   const screen = number.length === 0 ? reset : number;
+
 
   const handleKeyDown = (e: KeyboardEvent) => {
     const value = e.key;
@@ -20,6 +21,7 @@ export const App = (): React.ReactElement => {
       setSign("");
       setReset(0);
     }
+
     else {
       setNumber(number + value);
     }
@@ -29,7 +31,7 @@ export const App = (): React.ReactElement => {
     document.addEventListener('keydown', handleKeyDown, true);
   })
 
-  const handlerFunc = (value: any) => {
+  const handlerFunc = (value: number | string) => {
     if (value === "C") {
       setNumber([]);
       setSign("");
@@ -38,6 +40,7 @@ export const App = (): React.ReactElement => {
 
     else if (value === ".") {
       setNumber(number + value);
+
     }
 
     else if (value === "/" || value === "X" || value === "-" || value === "+") {
@@ -58,16 +61,12 @@ export const App = (): React.ReactElement => {
             : sign === "-" ? a - b
               : sign === "X" ? a * b : a / b;
         setNumber(number === 0 && sign === "/" ? "Can't divide with 0" : toLocaleString(
-          math(
-            Number(removeSpaces(reset)),
-            Number(removeSpaces(number)),
-            sign
-          )),
-        )
+          math(reset, number as number, sign)
+        ));
       }
     }
     else if (value === "%") {
-      let num = number ? parseFloat(removeSpaces(number)) : 0;
+      let num = number ? parseFloat(removeSpaces(number as number)) : 0;
       let res = reset ? parseFloat(removeSpaces(reset)) : 0;
       setNumber(num /= Math.pow(100, 1))
       setReset(res /= Math.pow(100, 1))
@@ -79,12 +78,12 @@ export const App = (): React.ReactElement => {
     }
   }
 
-  return <Calculator screen={screen} onClick={(e: any) => handlerFunc(e)} />
+  return <Calculator screen={screen} onClick={handlerFunc} />
 };
 
 export default App;
 
-const toLocaleString = (number: string) =>
+const toLocaleString = (number: string | number) =>
   String(number).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
 
 const removeSpaces = (number: number) => number.toString().replace(/\s/g, "");

@@ -9,7 +9,7 @@ interface CalculatorButtonProps {
     colour: string;
     value: string | number;
     children: React.ReactNode;
-    onClick: (value: any) => void;
+    onClick: (value: string | number) => void;
 }
 
 export const CalculatorButton = (props: CalculatorButtonProps): React.ReactElement => {
@@ -27,7 +27,7 @@ interface ButtonTypeProps {
     colour: string;
     value: string | number;
     children: React.ReactNode;
-    onClick: (value: any) => void;
+    onClick: (value: string | number) => void;
 }
 
 

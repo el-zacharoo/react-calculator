@@ -14,7 +14,12 @@ import { macTheme } from '../macTheme';
 import CalculatorButton from './CalculatorButton';
 import Screen from './Screen';
 
-export const Calculator = (props: any): React.ReactElement => {
+type CalculatorTypesProps = {
+    screen: number[] & number;
+    onClick: (value: string | number) => void;
+}
+
+export const Calculator = (props: CalculatorTypesProps): React.ReactElement => {
     const [value, setValue] = useState<number>(0);
 
     const handleChange = (e: React.SyntheticEvent, newValue: number) => {
@@ -45,13 +50,8 @@ export const Calculator = (props: any): React.ReactElement => {
 
 export default Calculator;
 
-type CalculatorTypesProps = {
-    screen: number[] & number;
-    onClick: (value: number) => void;
-}
-
 const Android = (props: CalculatorTypesProps): React.ReactElement => {
-    const { screen, onClick } = props;
+    const { screen } = props;
 
     return (
         <CardContent>
@@ -59,7 +59,7 @@ const Android = (props: CalculatorTypesProps): React.ReactElement => {
             <Grid sx={{ mt: 2 }} spacing={1} columns={4} container>
                 {androidArr.map((item, index) =>
                     <Grid xs={item.span} key={index} >
-                        <CalculatorButton type="android" value={item.value} onClick={onClick} colour={item.colour} >{item.title}</CalculatorButton>
+                        <CalculatorButton type="android" value={item.value} {...props} colour={item.colour} >{item.title}</CalculatorButton>
                     </Grid>
                 )}
             </Grid>
