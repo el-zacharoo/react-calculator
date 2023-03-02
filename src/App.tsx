@@ -12,7 +12,7 @@ export const App = (): React.ReactElement => {
   const screen = number.length === 0 ? reset : number;
 
 
-  const handleKeyDown = (e: KeyboardEvent) => {
+  const handleKeyDown = (e: KeyboardEvent): void => {
     const value = e.key;
     if (value === "Backspace") {
       setNumber(number.slice(0, -1));
@@ -31,7 +31,7 @@ export const App = (): React.ReactElement => {
     document.addEventListener('keydown', handleKeyDown, true);
   })
 
-  const handlerFunc = (value: number | string) => {
+  const handlerFunc = (value: number | string): void => {
     if (value === "C") {
       setNumber([]);
       setSign("");
@@ -83,7 +83,7 @@ export const App = (): React.ReactElement => {
 
 export default App;
 
-const toLocaleString = (number: string | number) =>
+const toLocaleString = (number: string | number): string =>
   String(number).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
 
-const removeSpaces = (number: number) => number.toString().replace(/\s/g, "");
+const removeSpaces = (number: number): string => number.toString().replace(/\s/g, "");

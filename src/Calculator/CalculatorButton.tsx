@@ -11,6 +11,7 @@ type CalculatorButtonProps = {
     children: React.ReactNode;
     onClick: (value: string | number) => void;
 }
+
 export const CalculatorButton = (props: CalculatorButtonProps): React.ReactElement => {
     const { type } = props;
 
@@ -23,7 +24,7 @@ export const CalculatorButton = (props: CalculatorButtonProps): React.ReactEleme
 export default CalculatorButton;
 
 
-const MacButton = (props: CalculatorButtonProps) => {
+const MacButton = (props: CalculatorButtonProps): React.ReactElement => {
     const { colour, value, children, onClick } = props;
 
     return (
@@ -50,7 +51,7 @@ const MacButton = (props: CalculatorButtonProps) => {
     )
 }
 
-const AndroidButton = (props: CalculatorButtonProps) => {
+const AndroidButton = (props: CalculatorButtonProps): React.ReactElement => {
     const { colour, value, children, onClick } = props;
     const dim = 75;
 

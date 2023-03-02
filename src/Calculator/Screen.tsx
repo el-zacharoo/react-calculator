@@ -51,7 +51,7 @@ const MacScreen = (props: ScreenTypeProps): React.ReactElement => {
         </Box>
     )
 }
-const AndroidScreen = (props: ScreenTypeProps) => {
+const AndroidScreen = (props: ScreenTypeProps): React.ReactElement => {
     const { value, header } = props;
 
     return (

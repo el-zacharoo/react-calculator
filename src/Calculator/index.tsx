@@ -19,32 +19,44 @@ type CalculatorTypesProps = {
     onClick: (value: string | number) => void;
 }
 
+type TabProps = {
+    label: string;
+    state: number;
+    theme: Theme;
+}
+
+type CalculatorArray = {
+    title: string | number;
+    colour: string;
+    value: number | string;
+    span: number
+}
+
 export const Calculator = (props: CalculatorTypesProps): React.ReactElement => {
     const [value, setValue] = useState<number>(0);
 
-    const handleChange = (e: React.SyntheticEvent, newValue: number) => {
+    const handleChange = (newValue: number) => {
         setValue(newValue);
     };
+
     const theme = themeSwitch(value);
 
     return (
-        <Box sx={{ width: '100%' }}>
-            <ThemeProvider theme={theme} >
-                <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 2 }}>
-                    <Tabs value={value} onChange={handleChange} >
-                        {tabArr.map((tab, index: number) =>
-                            <Tab key={index} label={tab.label} />
-                        )}
-                    </Tabs>
-                </Box>
-                <Container maxWidth="xs">
-                    <Card>
-                        {tabArr[0].state === value && <Mac {...props} />}
-                        {tabArr[1].state === value && <Android {...props} />}
-                    </Card>
-                </Container>
-            </ThemeProvider>
-        </Box>
+        <ThemeProvider theme={theme} >
+            <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 2 }}>
+                <Tabs value={value}  >
+                    {tabArr.map((tab: TabProps, index: number) =>
+                        <Tab onClick={() => handleChange(index)} key={index} label={tab.label} />
+                    )}
+                </Tabs>
+            </Box>
+            <Container maxWidth="xs">
+                <Card>
+                    {tabArr[0].state === value && <Mac {...props} />}
+                    {tabArr[1].state === value && <Android {...props} />}
+                </Card>
+            </Container>
+        </ThemeProvider>
     );
 }
 
@@ -57,7 +69,7 @@ const Android = (props: CalculatorTypesProps): React.ReactElement => {
         <CardContent>
             <Screen type="android" value={screen} />
             <Grid sx={{ mt: 2 }} spacing={1} columns={4} container>
-                {androidArr.map((item, index) =>
+                {androidArr.map((item: CalculatorArray, index: number) =>
                     <Grid xs={item.span} key={index} >
                         <CalculatorButton type="android" value={item.value} {...props} colour={item.colour} >{item.title}</CalculatorButton>
                     </Grid>
@@ -95,13 +107,13 @@ const themeSwitch = (value: number): Theme => {
     return macTheme;
 }
 
-const tabArr = [
+const tabArr: Array<TabProps> = [
     { label: 'Mac Calculator', state: 0, theme: macTheme },
     { label: 'Android Calculator', state: 1, theme: androidTheme }
 ]
 
 
-const macArr = [
+const macArr: Array<CalculatorArray> = [
     { title: 'C', colour: 'gray.200', value: 'C', span: 1 },
     { title: '+/-', colour: 'gray.200', value: "+/-", span: 1 },
     { title: '%', colour: 'gray.200', value: "%", span: 1 },
@@ -133,7 +145,7 @@ const macArr = [
     { title: '=', colour: 'primary.main', value: "=", span: 1 },
 ];
 
-const androidArr = [
+const androidArr: Array<CalculatorArray> = [
     { title: 'C', colour: 'error.main', value: 'C', span: 1 },
     { title: '( )', colour: 'primary.main', value: "()", span: 1 },
     { title: '%', colour: 'primary.main', value: "%", span: 1 },
@@ -166,7 +178,7 @@ const androidArr = [
     { title: '=', colour: 'primary.main', value: "=", span: 1 },
 ];
 
-const border = {
+const border: object = {
     '--Grid-borderWidth': '1px',
     borderTop: 'var(--Grid-borderWidth) solid',
     borderLeft: 'var(--Grid-borderWidth) solid',
