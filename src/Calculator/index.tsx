@@ -80,7 +80,7 @@ const Android = (props: CalculatorTypesProps): React.ReactElement => {
 }
 
 const Mac = (props: CalculatorTypesProps): React.ReactElement => {
-    const { screen, onClick } = props;
+    const { screen } = props;
 
     return (
         <>
@@ -88,7 +88,7 @@ const Mac = (props: CalculatorTypesProps): React.ReactElement => {
             <Grid columns={4} sx={border} container>
                 {macArr.map((item, index) =>
                     <Grid xs={item.span} key={index} >
-                        <CalculatorButton type="mac" value={item.value} onClick={onClick} colour={item.colour} >{item.title}</CalculatorButton>
+                        <CalculatorButton type="mac" value={item.value} {...props} colour={item.colour} >{item.title}</CalculatorButton>
                     </Grid>
                 )}
             </Grid>
