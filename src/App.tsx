@@ -103,4 +103,3 @@ const toLocaleString = (number: string | number): string =>
   String(number).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
 
 const removeSpaces = (number: number): string => number.toString().replace(/\s/g, "");
-
