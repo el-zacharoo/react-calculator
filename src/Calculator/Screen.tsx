@@ -11,7 +11,8 @@ type ScreenTypes = {
 
 export const Screen = (props: ScreenTypes): React.ReactElement => {
     const { value, type } = props;
-    let header
+    let header: string
+    
     if (value.length > 15) {
         header = 'h5'
     }

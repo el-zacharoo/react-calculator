@@ -18,7 +18,7 @@ export const CalculatorButton = (props: CalculatorButtonProps): React.ReactEleme
     switch (type) {
         case 'mac': return <MacButton {...props} />
         case 'android': return <AndroidButton {...props} />
-        default: throw new Error('Invalid type')
+        default: throw new Error('Invalid calculator button type')
     }
 }
 export default CalculatorButton;

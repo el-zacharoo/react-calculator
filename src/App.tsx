@@ -1,11 +1,10 @@
 import React, { useState, useCallback, useEffect } from 'react';
 
-
-import Calculator from './Calculator';
+import Calculator from '@/Calculator';
 
 // TODO infer correct types
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type CalcNumber = any
+type CalcNumber = any;
 
 export const App = (): React.ReactElement => {
   const [number, setNumber] = useState<CalcNumber>([]);
