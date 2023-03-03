@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+
 
 import Calculator from './Calculator';
 
-type CalcNumber = any;
+// TODO infer correct types
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type CalcNumber = any
 
 export const App = (): React.ReactElement => {
   const [number, setNumber] = useState<CalcNumber>([]);
@@ -11,25 +14,23 @@ export const App = (): React.ReactElement => {
 
   const screen = number.length === 0 ? reset : number;
 
-
   const handleKeyDown = (e: KeyboardEvent): void => {
-    const value = e.key;
-    if (value === "Backspace") {
-      setNumber(number.slice(0, -1));
-    } else if (value === "Escape") {
-      setNumber([]);
-      setSign("");
-      setReset(0);
-    }
+    const values = ["Escape", "x", "/", "+", "-", ".", "=", "%", "+/-", "Enter", 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
-    else {
-      setNumber(number + value);
+    if (values.map((value) => value.toString()).includes(e.key)) {
+      if (e.key === "Escape") {
+        return handlerFunc("C");
+      }
+      else if (e.key === "x") {
+        return handlerFunc("X");
+      }
+      else if (e.key === "Enter") {
+        return handlerFunc("=");
+      }
+      return handlerFunc(e.key);
     }
   }
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown, true);
-  })
+  document.addEventListener('keydown', handleKeyDown, true)
 
   const handlerFunc = (value: number | string): void => {
     if (value === "C") {
