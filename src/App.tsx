@@ -25,7 +25,13 @@ export const App = (): React.ReactElement => {
       setNumber(number + value);
     }
 
-    else if (value === "/" || value === "X" || value === "-" || value === "+") {
+    else if (value === "/" || value === "X" || value === "-") {
+      setSign(value);
+      setReset(!reset && number ? number : reset)
+      setNumber([]);
+    }
+
+    else if (value === "+") {
       setSign(value);
       setReset(!reset && number ? number : reset)
       setNumber([]);
@@ -39,12 +45,11 @@ export const App = (): React.ReactElement => {
     else if (value === "=") {
       if (sign && number) {
         const math = (a: number, b: number, sign: string) =>
-          sign === "+" ? a + b
-            : sign === "-" ? a - b
-              : sign === "X" ? a * b : a / b;
+          sign === "/" ? a / b : sign === "X" ? a * b : sign === "-" ? a - b : a + b;
+
         setNumber(number === 0 && sign === "/" ? "Can't divide with 0" : toLocaleString(
-          math(reset, number as number, sign)
-        ));
+          math(parseFloat(removeSpaces(reset)), parseFloat(removeSpaces(number)), sign)
+        )); 12
       }
     }
     else if (value === "%") {
@@ -60,7 +65,7 @@ export const App = (): React.ReactElement => {
   }, [number, reset, sign])
 
   const handleKeyDown = useCallback((e: KeyboardEvent): void => {
-    const values = ["Escape", "x", "/", "+", "-", ".", "=", "%", "+/-", "Enter", 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+    const values = ["Escape", "Backspace", "x", "/", "+", "-", ".", "=", "%", "+/-", "Enter", 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
     if (values.map((value) => value.toString()).includes(e.key)) {
       if (e.key === "Escape") {
@@ -72,9 +77,15 @@ export const App = (): React.ReactElement => {
       else if (e.key === "Enter") {
         return handlerFunc("=");
       }
+      else if (e.key === "Backspace") {
+        return setNumber(number.slice(0, -1));
+      }
+      else if (e.key === "Shift") {
+        return setSign("");
+      }
       return handlerFunc(e.key);
     }
-  }, [handlerFunc])
+  }, [handlerFunc, number])
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown)
