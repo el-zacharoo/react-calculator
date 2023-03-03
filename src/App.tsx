@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 
 import Calculator from './Calculator';
@@ -11,28 +11,10 @@ export const App = (): React.ReactElement => {
   const [number, setNumber] = useState<CalcNumber>([]);
   const [sign, setSign] = useState<string>("");
   const [reset, setReset] = useState<number>(0);
-
   const screen = number.length === 0 ? reset : number;
 
-  const handleKeyDown = (e: KeyboardEvent): void => {
-    const values = ["Escape", "x", "/", "+", "-", ".", "=", "%", "+/-", "Enter", 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
-    if (values.map((value) => value.toString()).includes(e.key)) {
-      if (e.key === "Escape") {
-        return handlerFunc("C");
-      }
-      else if (e.key === "x") {
-        return handlerFunc("X");
-      }
-      else if (e.key === "Enter") {
-        return handlerFunc("=");
-      }
-      return handlerFunc(e.key);
-    }
-  }
-  document.addEventListener('keydown', handleKeyDown, true)
-
-  const handlerFunc = (value: number | string): void => {
+  const handlerFunc = useCallback((value: number | string): void => {
     if (value === "C") {
       setNumber([]);
       setSign("");
@@ -41,7 +23,6 @@ export const App = (): React.ReactElement => {
 
     else if (value === ".") {
       setNumber(number + value);
-
     }
 
     else if (value === "/" || value === "X" || value === "-" || value === "+") {
@@ -75,9 +56,32 @@ export const App = (): React.ReactElement => {
     }
     else {
       setNumber(number + value);
-      handleKeyDown;
     }
-  }
+  }, [number, reset, sign])
+
+  const handleKeyDown = useCallback((e: KeyboardEvent): void => {
+    const values = ["Escape", "x", "/", "+", "-", ".", "=", "%", "+/-", "Enter", 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+
+    if (values.map((value) => value.toString()).includes(e.key)) {
+      if (e.key === "Escape") {
+        return handlerFunc("C");
+      }
+      else if (e.key === "x") {
+        return handlerFunc("X");
+      }
+      else if (e.key === "Enter") {
+        return handlerFunc("=");
+      }
+      return handlerFunc(e.key);
+    }
+  }, [handlerFunc])
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown)
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [handleKeyDown])
 
   return <Calculator screen={screen} onClick={handlerFunc} />
 };
@@ -88,3 +92,4 @@ const toLocaleString = (number: string | number): string =>
   String(number).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
 
 const removeSpaces = (number: number): string => number.toString().replace(/\s/g, "");
+
