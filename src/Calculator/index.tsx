@@ -9,10 +9,10 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Grid from '@mui/material/Unstable_Grid2';
 
-import { androidTheme } from '../androidTheme';
-import { macTheme } from '../macTheme';
 import CalculatorButton from './CalculatorButton';
 import Screen from './Screen';
+import { androidTheme } from '../androidTheme';
+import { macTheme } from '../macTheme';
 
 type CalculatorTypesProps = {
     screen: number[] & number;
@@ -29,10 +29,10 @@ type CalculatorArray = {
     title: string | number;
     colour: string;
     value: number | string;
-    span: number
+    span: number;
 }
 
-export const Calculator = (props: CalculatorTypesProps): React.ReactElement => {
+export const Calculator = (props: CalculatorTypesProps): JSX.Element => {
     const [value, setValue] = useState<number>(0);
 
     const handleChange = (newValue: number) => {
@@ -62,7 +62,7 @@ export const Calculator = (props: CalculatorTypesProps): React.ReactElement => {
 
 export default Calculator;
 
-const Android = (props: CalculatorTypesProps): React.ReactElement => {
+const Android = (props: CalculatorTypesProps): JSX.Element => {
     const { screen } = props;
 
     return (
@@ -79,7 +79,7 @@ const Android = (props: CalculatorTypesProps): React.ReactElement => {
     )
 }
 
-const Mac = (props: CalculatorTypesProps): React.ReactElement => {
+const Mac = (props: CalculatorTypesProps): JSX.Element => {
     const { screen } = props;
 
     return (

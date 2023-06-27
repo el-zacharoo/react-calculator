@@ -1,4 +1,6 @@
-export const typography: object = {
+import { TypographyVariantsOptions } from "@mui/material";
+
+export const typography: TypographyVariantsOptions = {
     h1: {
         fontSize: '2.5rem',
         fontWeight: 400,

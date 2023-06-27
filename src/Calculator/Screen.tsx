@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
@@ -9,7 +7,7 @@ type ScreenTypes = {
     type: string;
 }
 
-export const Screen = (props: ScreenTypes): React.ReactElement => {
+export const Screen = (props: ScreenTypes): JSX.Element => {
     const { value, type } = props;
     let header: string
 
@@ -35,7 +33,7 @@ type ScreenTypeProps = {
     header: string;
 }
 
-const MacScreen = (props: ScreenTypeProps): React.ReactElement => {
+const MacScreen = (props: ScreenTypeProps): JSX.Element => {
     const { value, header } = props;
 
     return (
@@ -55,7 +53,7 @@ const MacScreen = (props: ScreenTypeProps): React.ReactElement => {
         </Box>
     )
 }
-const AndroidScreen = (props: ScreenTypeProps): React.ReactElement => {
+const AndroidScreen = (props: ScreenTypeProps): JSX.Element => {
     const { value, header } = props;
 
     return (

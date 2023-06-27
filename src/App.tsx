@@ -1,13 +1,10 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 import Calculator from '@/Calculator';
 
 // TODO infer correct types
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type CalcNumber = any;
-
-export const App = (): React.ReactElement => {
-  const [number, setNumber] = useState<CalcNumber>([]);
+export const App = (): JSX.Element => {
+  const [number, setNumber] = useState<any>([]);
   const [sign, setSign] = useState<string>("");
   const [reset, setReset] = useState<number>(0);
   const screen = number.length === 0 ? reset : number;
@@ -39,6 +36,7 @@ export const App = (): React.ReactElement => {
     else if (value === "+/-") {
       setNumber(number * -1);
       setReset(reset * -1);
+
     }
 
     else if (value === "=") {
@@ -52,7 +50,7 @@ export const App = (): React.ReactElement => {
       }
     }
     else if (value === "%") {
-      let num = number ? parseFloat(removeSpaces(number as number)) : 0;
+      let num = number ? parseFloat(removeSpaces(Number(number))) : 0;
       let res = reset ? parseFloat(removeSpaces(reset)) : 0;
       setNumber(num /= Math.pow(100, 1))
       setReset(res /= Math.pow(100, 1))
